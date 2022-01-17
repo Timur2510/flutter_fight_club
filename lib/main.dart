@@ -28,8 +28,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   BodyPart? defendingBodyPart;
   BodyPart? attackingBodyPart;
-  bool defendingButton = false;
-  bool attackingButton = false;
+  // bool defendingButton = false;
+  // bool attackingButton = false;
 
 
 
@@ -157,7 +157,32 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                   width: 16),
               Expanded(
-                child: GoButton(defendingButton: defendingButton, attackingButton: attackingButton, goButtonSetter: _tabGoButton,),
+                child:  GestureDetector(
+                  onTap: () {
+                    if(attackingBodyPart != null && defendingBodyPart != null){
+                      setState(() {
+                        attackingBodyPart=null;
+                        defendingBodyPart=null;
+                      });
+
+                    }
+                  },
+                  child: SizedBox(
+                  height: 40,
+                  child: ColoredBox(
+                    color: attackingBodyPart==null || defendingBodyPart==null ? Color.fromRGBO(0, 0, 0, 0.38): Color.fromRGBO(0, 0, 0, 0.87),
+                    child: Center(
+                      child: Text(
+                        "Go".toUpperCase(),
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 16),
+
+                      ),
+                    ),
+                  ),
+              ),
+                ),
+                // GoButton(defendingButton: defendingButton, attackingButton: attackingButton, goButtonSetter: _tabGoButton,),
+
               ),
               SizedBox(
                   width: 16),
@@ -175,25 +200,25 @@ class _MyHomePageState extends State<MyHomePage> {
   void _selectDefendingBodyPart(final BodyPart value) {
     setState(() {
       defendingBodyPart = value;
-      defendingButton=true;
+      // defendingButton=true;
     });
   }
 
   void _selectAttackingBodyPart(final BodyPart value) {
     setState(() {
       attackingBodyPart=value;
-      attackingButton =true;
+      // attackingButton =true;
     });
   }
 
-  void _tabGoButton() {
-    setState(() {
-      defendingButton=false;
-      attackingButton=false;
-      attackingBodyPart =BodyPart.zero;
-      defendingBodyPart =BodyPart.zero;
-    });
-  }
+  // void _tabGoButton() {
+  //   setState(() {
+  //     defendingButton=false;
+  //     attackingButton=false;
+  //     // attackingBodyPart =BodyPart.zero;
+  //     // defendingBodyPart =BodyPart.zero;
+  //   });
+  // }
 }
 
 class newRow extends StatelessWidget {
@@ -230,38 +255,38 @@ class newRow extends StatelessWidget {
   }
 }
 
-class GoButton extends StatelessWidget {
-  const GoButton({
-    Key? key,
-    required this.defendingButton,
-    required this.attackingButton,
-    required this.goButtonSetter,
-  }) : super(key: key);
-
-  final bool defendingButton;
-  final bool attackingButton;
-  final ValueGetter<void> goButtonSetter;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: ()=> goButtonSetter(),
-      child: SizedBox(
-        height: 40,
-        child: ColoredBox(
-          color: defendingButton && attackingButton? Color.fromRGBO(0, 0, 0, 0.87): Color.fromRGBO(0, 0, 0, 0.38),
-          child: Center(
-            child: Text(
-              "Go".toUpperCase(),
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 16),
-
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+// class GoButton extends StatelessWidget {
+//   const GoButton({
+//     Key? key,
+//     required this.defendingButton,
+//     required this.attackingButton,
+//     required this.goButtonSetter,
+//   }) : super(key: key);
+//
+//   final bool defendingButton;
+//   final bool attackingButton;
+//   final ValueGetter<void> goButtonSetter;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: ()=> goButtonSetter(),
+//       child: SizedBox(
+//         height: 40,
+//         child: ColoredBox(
+//           color: defendingButton && attackingButton? Color.fromRGBO(0, 0, 0, 0.87): Color.fromRGBO(0, 0, 0, 0.38),
+//           child: Center(
+//             child: Text(
+//               "Go".toUpperCase(),
+//               style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 16),
+//
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class BodyPart{
   final String name;
@@ -270,7 +295,7 @@ class BodyPart{
   static const legs=BodyPart._("Legs");
   static const head=BodyPart._("Head");
   static const torso=BodyPart._("Torso");
-  static const zero=BodyPart._("Zero");
+  // static const zero=BodyPart._("Zero");
 
   @override
   String toString() {
