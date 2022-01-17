@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(229, 229, 229, 1),
+      backgroundColor: Color.fromRGBO(213, 222, 240, 1),
       body: Column(
         children: [
           SizedBox(
